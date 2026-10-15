@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donut Amethyst Rewards - Verification</title>
+    <style>
+        * { box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+        body {
+            background-color: #0b0f19;
+            color: #e2e8f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-image: radial-gradient(circle at center, #1e1b4b 0%, #0b0f19 70%);
+        }
+        .card {
+            background-color: #111827;
+            border: 2px solid #a855f7;
+            padding: 2.5rem;
+            border-radius: 16px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: 0 0 20px rgba(168, 85, 247, 0.2);
+            text-align: center;
+        }
+        .step { display: none; }
+        .step.active { display: block; }
+        h2 { margin-top: 0; font-size: 1.6rem; color: #38bdf8; }
+        p { color: #9ca3af; font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.5rem; }
+        .input-group { margin-bottom: 1.25rem; text-align: left; }
+        label { display: block; margin-bottom: 0.5rem; font-size: 0.85rem; color: #a855f7; font-weight: 600; }
+        input[type="text"], input[type="email"] {
+            width: 100%; padding: 0.85rem; border: 1px solid #374151;
+            border-radius: 8px; background-color: #1f2937; color: #ffffff; font-size: 1rem;
+        }
+        input:focus { outline: none; border-color: #38bdf8; }
+        .btn {
+            width: 100%; padding: 0.85rem; border: none; border-radius: 8px;
+            font-size: 1rem; font-weight: 600; cursor: pointer; margin-top: 0.5rem;
+        }
+        .btn-primary { background-color: #38bdf8; color: #0f172a; }
+        .btn-secondary { background-color: #374151; color: #9ca3af; margin-top: 0.75rem; }
+        .error-hint { color: #f87171; font-size: 0.85rem; margin-top: 0.5rem; display: none; text-align: left; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    
+    <div id="step-1" class="step active">
+        <h2>Rewards Verification</h2>
+        <p>Please supply your community identities to begin your registration entry.</p>
+        <div class="input-group">
+            <label for="minecraft-username">Minecraft Username</label>
+            <input type="text" id="minecraft-username" placeholder="e.g., Steve">
+            <div id="error-mc" class="error-hint">Minecraft username is required.</div>
+        </div>
+        <div class="input-group">
+            <label for="discord-username">Discord Username</label>
+            <input type="text" id="discord-username" placeholder="e.g., alex_community">
+            <div id="error-dc" class="error-hint">Discord username is required.</div>
+        </div>
+        <button class="btn btn-primary" onclick="processStep1()">Next</button>
+    </div>
+
+    <!-- Step 2: Initial Email Entry -->
+    <div id="step-2" class="step">
+        <h2>Email Registration</h2>
+        <p>Provide your primary email address below.</p>
+        <div class="input-group">
+            <label for="email-first">Email Address</label>
+            <input type="email" id="email-first" placeholder="user@example.com">
+            <div id="error-2" class="error-hint">Please enter a valid email address.</div>
+        </div>
+        <button class="btn btn-primary" onclick="processStep2()">Next</button>
+        <button class="btn btn-secondary" onclick="showStep(1)">Back</button>
+    </div>
+
+    <!-- Step 3: Confirmation Entry -->
+    <div id="step-3" class="step">
+        <h2>Confirm Address</h2>
+        <p>Please re-enter your email address to prevent typos.</p>
+        <div class="input-group">
+            <label for="email-second">Re-enter Email Address</label>
+            <input type="email" id="email-second" placeholder="user@example.com">
+            <div id="error-3" class="error-hint">Email addresses do not match. Please verify your spelling.</div>
+        </div>
+        <button class="btn btn-primary" id="submit-btn" onclick="processStep3()">Verify Now</button>
+        <button class="btn btn-secondary" onclick="showStep(2)">Back</button>
+    </div>
+
+    <!-- Step 4: Administrative Instructions -->
+    <div id="step-4" class="step">
+        <h2>Request Logged</h2>
+        <p>Your details have been securely queued for review.</p>
+        <p style="background-color: #1f2937; padding: 1rem; border-radius: 8px; border-left: 4px solid #4ade80; text-align: left;">
+            Please contact an administrator directly to obtain your unique access code and finish verifying.
+        </p>
+    </div>
+</div>
+
+<script>
+    let submissionData = {
+        minecraftUsername: "",
+        discordUsername: "",
+        email: ""
+    };
+    let firstEmailValue = "";
+
+    function showStep(num) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById(`step-${num}`).classList.add('active');
+    }
+
+    function processStep1() {
+        const mcVal = document.getElementById('minecraft-username').value.trim();
+        const dcVal = document.getElementById('discord-username').value.trim();
+        
+        const mcErr = document.getElementById('error-mc');
+        const dcErr = document.getElementById('error-dc');
+
+        let isValid = true;
+
+        if (!mcVal) {
+            mcErr.style.display = 'block';
+            isValid = false;
+        } else {
+            mcErr.style.display = 'none';
+        }
+
+        if (!dcVal) {
+            dcErr.style.display = 'block';
+            isValid = false;
+        } else {
+            dcErr.style.display = 'none';
+        }
+
+        if (!isValid) return;
+
+        submissionData.minecraftUsername = mcVal;
+        submissionData.discordUsername = dcVal;
+        showStep(2);
+    }
+
+    function processStep2() {
+        const val = document.getElementById('email-first').value.trim();
+        const err = document.getElementById('error-2');
+        if (!val || !val.includes('@')) {
+            err.style.display = 'block';
+            return;
+        }
+        err.style.display = 'none';
+        firstEmailValue = val;
+        showStep(3);
+    }
+
+    async function processStep3() {
+        const val2 = document.getElementById('email-second').value.trim();
+        const err = document.getElementById('error-3');
+        const submitBtn = document.getElementById('submit-btn');
+
+        if (val2 !== firstEmailValue) {
+            err.style.display = 'block';
+            return;
+        }
+        err.style.display = 'none';
+        submissionData.email = val2;
+        
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Processing...";
+
+        try {
+            const response = await fetch('/api/verify-rewards', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(submissionData)
+            });
+
+            if (response.ok) {
+                showStep(4);
+            } else {
+                alert("Submission error. Please contact community staff directly.");
+                submitBtn.disabled = false;
+                submitBtn.innerText = "Verify Now";
+            }
+        } catch (e) {
+            showStep(4);
+        }
+    }
+</script>
+</body>
+</html>
