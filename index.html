@@ -92,12 +92,12 @@
         <button class="btn btn-secondary" onclick="showStep(2)">Back</button>
     </div>
 
-    <!-- Step 4: Administrative Instructions -->
+    <!-- Step 4: Administrative Instructions (Updated) -->
     <div id="step-4" class="step">
-        <h2>Request Logged</h2>
-        <p>Your details have been securely queued for review.</p>
+        <h2>Request Logged!</h2>
+        <p>Your details have been successfully queued for review.</p>
         <p style="background-color: #1f2937; padding: 1rem; border-radius: 8px; border-left: 4px solid #4ade80; text-align: left;">
-            Please contact an administrator directly to obtain your unique access code and finish verifying.
+            <strong>Next Step:</strong> Head over to our Discord server and <strong>open a ticket</strong>. Let our support team know you completed the form so an administrator can hand you your access code.
         </p>
     </div>
 </div>
@@ -182,7 +182,7 @@
             if (response.ok) {
                 showStep(4);
             } else {
-                alert("Submission error. Please contact community staff directly.");
+                alert("Submission error. Please open a ticket directly on our Discord server.");
                 submitBtn.disabled = false;
                 submitBtn.innerText = "Verify Now";
             }
