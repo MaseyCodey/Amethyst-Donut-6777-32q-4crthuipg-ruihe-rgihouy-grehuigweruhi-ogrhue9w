@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Donut Amethyst Rewards — Portal</title>
+    <title>Donut Amethyst Rewards</title>
     <style>
         :root {
             --bg-dark: #090d16;
@@ -16,234 +16,57 @@
             --accent-green: #4ade80;
             --error-red: #f87171;
         }
-
-        * {
-            box-sizing: border-box;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, sans-serif; }
         body {
             background-color: var(--bg-dark);
             color: var(--text-main);
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            padding: 2rem 1rem;
-            background-image: 
-                radial-gradient(circle at 10% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.12) 0%, transparent 40%);
+            background-image: radial-gradient(circle at center, #1e1b4b 0%, #090d16 100%);
         }
-
         .portal-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-purple);
             padding: 2.5rem;
             border-radius: 24px;
             width: 100%;
-            max-width: 460px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 50px rgba(168, 85, 247, 0.1);
-        }
-
-        .portal-header {
-            margin-bottom: 2rem;
+            max-width: 440px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
             text-align: center;
         }
-
-        .portal-logo {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            display: inline-block;
-        }
-
-        h1 {
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 0.25rem;
-        }
-
-        .portal-header p {
-            color: var(--text-muted);
-            font-size: 0.925rem;
-        }
-
-        .step {
-            display: none;
-        }
-
-        .step.active {
-            display: block;
-        }
-
-        .progress-container {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 2.5rem;
-            position: relative;
-        }
-
-        .progress-bar-bg {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: #1e293b;
-            transform: translateY(-50%);
-            z-index: 1;
-        }
-
-        .progress-bar-fill {
-            position: absolute;
-            top: 50%;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: linear-gradient(to right, var(--accent-blue), var(--accent-purple));
-            transform: translateY(-50%);
-            z-index: 2;
-            transition: width 0.3s ease;
-        }
-
-        .progress-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: #1e293b;
-            z-index: 3;
-            box-shadow: 0 0 0 4px var(--bg-dark);
-        }
-
-        .progress-dot.active {
-            background: var(--accent-blue);
-            box-shadow: 0 0 0 4px var(--bg-dark), 0 0 12px var(--accent-blue);
-        }
-
-        .progress-dot.complete {
-            background: var(--accent-purple);
-        }
-
-        .input-group {
-            margin-bottom: 1.5rem;
-            text-align: left;
-            width: 100%;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-size: 0.75rem;
-            color: var(--accent-purple);
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .input-wrapper {
-            position: relative;
-            width: 100%;
-        }
-
-        .input-icon {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 1.1rem;
-            pointer-events: none;
-        }
-
-        input[type="text"], input[type="email"] {
-            width: 100%;
-            padding: 0.85rem 1rem 0.85rem 2.75rem;
-            border: 1px solid #1e293b;
-            border-radius: 12px;
-            background-color: #0f172a;
-            color: #ffffff;
-            font-size: 0.95rem;
-        }
-
-        input:focus {
-            outline: none;
-            border-color: var(--accent-blue);
-        }
-
-        .step h2 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-            color: #ffffff;
-        }
-
-        .step p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 1.5rem;
-        }
-
-        .info-box {
-            background-color: rgba(30, 41, 59, 0.4);
-            padding: 1.25rem;
-            border-radius: 14px;
-            border-left: 4px solid var(--accent-green);
-            text-align: left;
-        }
-
-        .btn-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-            margin-top: 1.5rem;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 0.95rem;
-            border: none;
-            border-radius: 12px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-blue), #2563eb);
-            color: #ffffff;
-        }
-
-        .btn-secondary {
-            background-color: #1e293b;
-            color: var(--text-main);
-        }
-
-        .error-hint {
-            color: var(--error-red);
-            font-size: 0.8rem;
-            margin-top: 0.4rem;
-            display: none;
-        }
-
-        .portal-footer {
-            margin-top: 2rem;
-            font-size: 0.75rem;
-            color: var(--text-muted);
-        }
+        .portal-header { margin-bottom: 2rem; }
+        .portal-logo-img { width: 80px; height: 80px; border-radius: 20px; margin-bottom: 1rem; object-fit: cover; }
+        h1 { font-size: 1.6rem; color: #ffffff; margin-bottom: 0.25rem; }
+        .portal-header p { color: var(--text-muted); font-size: 0.9rem; }
+        .step { display: none; }
+        .step.active { display: block; }
+        .progress-container { display: flex; justify-content: space-between; margin-bottom: 2.5rem; position: relative; }
+        .progress-bar-bg { position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: #1e293b; transform: translateY(-50%); z-index: 1; }
+        .progress-bar-fill { position: absolute; top: 50%; left: 0; width: 0%; height: 2px; background: var(--accent-blue); transform: translateY(-50%); z-index: 2; transition: width 0.3s; }
+        .progress-dot { width: 12px; height: 12px; border-radius: 50%; background: #1e293b; z-index: 3; }
+        .progress-dot.active { background: var(--accent-blue); }
+        .progress-dot.complete { background: var(--accent-purple); }
+        .input-group { margin-bottom: 1.5rem; text-align: left; }
+        label { display: block; margin-bottom: 0.5rem; font-size: 0.75rem; color: var(--accent-purple); font-weight: 700; text-transform: uppercase; }
+        .input-wrapper { position: relative; }
+        .input-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); }
+        input { width: 100%; padding: 0.85rem 1rem 0.85rem 2.5rem; border: 1px solid #1e293b; border-radius: 12px; background-color: #0f172a; color: #ffffff; }
+        .btn-stack { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.5rem; }
+        .btn { width: 100%; padding: 0.95rem; border: none; border-radius: 12px; font-weight: 600; cursor: pointer; }
+        .btn-primary { background: var(--accent-blue); color: #090d16; }
+        .btn-secondary { background-color: #1e293b; color: var(--text-main); }
+        .error-hint { color: var(--error-red); font-size: 0.8rem; margin-top: 0.4rem; display: none; }
+        .info-box { background-color: rgba(30, 41, 59, 0.4); padding: 1.25rem; border-radius: 14px; border-left: 4px solid var(--accent-green); text-align: left; }
+        .portal-footer { margin-top: 2rem; font-size: 0.75rem; color: var(--text-muted); }
     </style>
 </head>
 <body>
 
 <div class="portal-card">
     <div class="portal-header">
-        <span class="portal-logo">🍩</span>
+        <img src="https://github.com" alt="Logo" class="portal-logo-img">
         <h1>Donut Amethyst</h1>
         <p>Official Rewards Verification Registry</p>
     </div>
@@ -256,76 +79,130 @@
         <div class="progress-dot" id="dot-3"></div>
     </div>
 
-    <!-- STEP 1: Identification Profiles -->
+    <!-- STEP 1 -->
     <div id="step-1" class="step active">
-        <h2>Account Profiles</h2>
-        <p>Link your community credentials to synchronize your rewards status.</p>
-        
         <div class="input-group">
-            <label for="minecraft-username">Minecraft Java Username</label>
+            <label>Minecraft Java Username</label>
             <div class="input-wrapper">
                 <span class="input-icon">🎮</span>
                 <input type="text" id="minecraft-username" placeholder="Enter username">
             </div>
             <div id="error-mc" class="error-hint">Minecraft username is required.</div>
         </div>
-
         <div class="input-group">
-            <label for="discord-username">Discord Account Handle</label>
+            <label>Discord Account Handle</label>
             <div class="input-wrapper">
                 <span class="input-icon">💬</span>
                 <input type="text" id="discord-username" placeholder="e.g., alex_community">
             </div>
             <div id="error-dc" class="error-hint">Discord username is required.</div>
         </div>
-
         <div class="btn-stack">
             <button class="btn btn-primary" onclick="processStep1()">Continue</button>
         </div>
     </div>
 
-    <!-- STEP 2: Email Registry -->
+    <!-- STEP 2 -->
     <div id="step-2" class="step">
-        <h2>Primary Email</h2>
-        <p>Provide your main email address below to bind your distribution ledger.</p>
-        
         <div class="input-group">
-            <label for="email-first">Email Address</label>
+            <label>Email Address</label>
             <div class="input-wrapper">
                 <span class="input-icon">✉️</span>
                 <input type="email" id="email-first" placeholder="name@example.com">
             </div>
             <div id="error-2" class="error-hint">Please input a valid email address.</div>
         </div>
-
         <div class="btn-stack">
             <button class="btn btn-primary" onclick="processStep2()">Next Step</button>
             <button class="btn btn-secondary" onclick="showStep(1)">Back</button>
         </div>
     </div>
 
-    <!-- STEP 3: Confirm Email Check -->
+    <!-- STEP 3 -->
     <div id="step-3" class="step">
-        <h2>Confirm Address</h2>
-        <p>Please enter your email a second time to protect against spelling errors.</p>
-        
         <div class="input-group">
-            <label for="email-second">Confirm Email Address</label>
+            <label>Confirm Email Address</label>
             <div class="input-wrapper">
                 <span class="input-icon">🛡️</span>
                 <input type="email" id="email-second" placeholder="name@example.com">
             </div>
             <div id="error-3" class="error-hint">Email entries do not match.</div>
         </div>
-
         <div class="btn-stack">
             <button class="btn btn-primary" id="submit-btn" onclick="processStep3()">Finalize Verification</button>
             <button class="btn btn-secondary" onclick="showStep(2)">Back</button>
         </div>
     </div>
 
-    <!-- STEP 4: Complete Screen -->
+    <!-- STEP 4 -->
     <div id="step-4" class="step">
-        <h2>Submission Pending</h2>
-        <p>Your details have been successfully queued for review.</p>
         <div class="info-box">
+            <p><strong>Next Steps:</strong> Head over to our Discord server and <strong>open a ticket</strong>. Let our support team know you completed the form so an administrator can hand you your access code.</p>
+        </div>
+    </div>
+</div>
+
+<script>
+    let submissionData = { minecraftUsername: "", discordUsername: "", email: "" };
+    let firstEmailValue = "";
+
+    function updateProgressBar(stepNum) {
+        const fillPercent = ((stepNum - 1) / 3) * 100;
+        document.getElementById('progress-bar').style.width = fillPercent + '%';
+        for (let i = 1; i <= 3; i++) {
+            const dot = document.getElementById('dot-' + i);
+            if (dot) {
+                if (i < stepNum) dot.className = "progress-dot complete";
+                else if (i === stepNum || (stepNum === 4 && i === 3)) dot.className = "progress-dot active";
+                else dot.className = "progress-dot";
+            }
+        }
+    }
+
+    function showStep(num) {
+        document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+        document.getElementById('step-' + num).classList.add('active');
+        updateProgressBar(num);
+    }
+
+    function processStep1() {
+        const mcVal = document.getElementById('minecraft-username').value.trim();
+        const dcVal = document.getElementById('discord-username').value.trim();
+        let isValid = true;
+        if (!mcVal) { document.getElementById('error-mc').style.display = 'block'; isValid = false; }
+        else { document.getElementById('error-mc').style.display = 'none'; }
+        if (!dcVal) { document.getElementById('error-dc').style.display = 'block'; isValid = false; }
+        else { document.getElementById('error-dc').style.display = 'none'; }
+        if (!isValid) return;
+        submissionData.minecraftUsername = mcVal;
+        submissionData.discordUsername = dcVal;
+        showStep(2);
+    }
+
+    function processStep2() {
+        const val = document.getElementById('email-first').value.trim();
+        if (!val || !val.includes('@')) { document.getElementById('error-2').style.display = 'block'; return; }
+        document.getElementById('error-2').style.display = 'none';
+        firstEmailValue = val;
+        showStep(3);
+    }
+
+    async function processStep3() {
+        const val2 = document.getElementById('email-second').value.trim();
+        if (val2 !== firstEmailValue) { document.getElementById('error-3').style.display = 'block'; return; }
+        document.getElementById('error-3').style.display = 'none';
+        submissionData.email = val2;
+        document.getElementById('submit-btn').disabled = true;
+        document.getElementById('submit-btn').innerText = "Processing...";
+        try {
+            const response = await fetch('/api/verify-rewards', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(submissionData)
+            });
+            if (response.ok) { showStep(4); }
+            else { alert("Submission error."); document.getElementById('submit-btn').disabled = false; document.getElementById('submit-btn').innerText = "Finalize Verification"; }
+        } catch (e) { showStep(4); }
+    }
+</script>
+</body>
