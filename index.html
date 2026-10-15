@@ -7,7 +7,7 @@
     <style>
         :root {
             --bg-dark: #090d16;
-            --card-bg: rgba(17, 24, 39, 0.75);
+            --card-bg: #111827;
             --border-purple: rgba(168, 85, 247, 0.4);
             --text-main: #f1f5f9;
             --text-muted: #94a3b8;
@@ -33,29 +33,23 @@
             align-items: center;
             min-height: 100vh;
             padding: 2rem 1rem;
-            overflow-x: hidden;
             background-image: 
                 radial-gradient(circle at 10% 20%, rgba(168, 85, 247, 0.15) 0%, transparent 40%),
                 radial-gradient(circle at 90% 80%, rgba(56, 189, 248, 0.12) 0%, transparent 40%);
         }
 
-        /* Portal Container Card */
         .portal-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background-color: var(--card-bg);
             border: 1px solid var(--border-purple);
-            padding: 3rem 2.5rem;
+            padding: 2.5rem;
             border-radius: 24px;
             width: 100%;
             max-width: 460px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 50px rgba(168, 85, 247, 0.1);
-            position: relative;
         }
 
-        /* Top Header Branding */
         .portal-header {
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             text-align: center;
         }
 
@@ -63,46 +57,33 @@
             font-size: 2.5rem;
             margin-bottom: 0.5rem;
             display: inline-block;
-            filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.5));
         }
 
         h1 {
             font-size: 1.6rem;
             font-weight: 800;
-            letter-spacing: -0.025em;
-            background: linear-gradient(to right, var(--text-main), var(--accent-purple));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 0.5rem;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
         }
 
         .portal-header p {
             color: var(--text-muted);
             font-size: 0.925rem;
-            line-height: 1.5;
         }
 
-        /* Multi-Step Visibility & Transitions */
         .step {
             display: none;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: all 0.4s ease;
         }
 
         .step.active {
             display: block;
-            opacity: 1;
-            transform: translateY(0);
         }
 
-        /* Animated Progress Tracker */
         .progress-container {
             display: flex;
             justify-content: space-between;
             margin-bottom: 2.5rem;
             position: relative;
-            padding: 0 10px;
         }
 
         .progress-bar-bg {
@@ -129,12 +110,11 @@
         }
 
         .progress-dot {
-            width: 10px;
-            height: 10px;
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
             background: #1e293b;
             z-index: 3;
-            transition: all 0.3s ease;
             box-shadow: 0 0 0 4px var(--bg-dark);
         }
 
@@ -145,18 +125,17 @@
 
         .progress-dot.complete {
             background: var(--accent-purple);
-            box-shadow: 0 0 0 4px var(--bg-dark), 0 0 12px var(--accent-purple);
         }
 
-        /* Form Controls */
         .input-group {
             margin-bottom: 1.5rem;
             text-align: left;
+            width: 100%;
         }
 
         label {
             display: block;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.5rem;
             font-size: 0.75rem;
             color: var(--accent-purple);
             font-weight: 700;
@@ -166,6 +145,7 @@
 
         .input-wrapper {
             position: relative;
+            width: 100%;
         }
 
         .input-icon {
@@ -173,79 +153,62 @@
             left: 1rem;
             top: 50%;
             transform: translateY(-50%);
-            color: var(--text-muted);
             font-size: 1.1rem;
             pointer-events: none;
         }
 
         input[type="text"], input[type="email"] {
             width: 100%;
-            padding: 0.95rem 1rem 0.95rem 2.75rem;
+            padding: 0.85rem 1rem 0.85rem 2.75rem;
             border: 1px solid #1e293b;
             border-radius: 12px;
-            background-color: rgba(15, 23, 42, 0.6);
+            background-color: #0f172a;
             color: #ffffff;
             font-size: 0.95rem;
-            transition: all 0.2s ease;
         }
 
         input:focus {
             outline: none;
             border-color: var(--accent-blue);
-            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
-            background-color: rgba(15, 23, 42, 0.9);
         }
 
-        /* Text Headings Inside Card Steps */
         .step h2 {
             font-size: 1.25rem;
             font-weight: 700;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             color: #ffffff;
-            text-align: left;
         }
 
         .step p {
             color: var(--text-muted);
             font-size: 0.9rem;
-            line-height: 1.6;
-            margin-bottom: 1.75rem;
-            text-align: left;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
         }
 
-        /* Success Notice Box */
         .info-box {
             background-color: rgba(30, 41, 59, 0.4);
             padding: 1.25rem;
             border-radius: 14px;
             border-left: 4px solid var(--accent-green);
             text-align: left;
-            margin-top: 1rem;
         }
 
-        .info-box p {
-            margin-bottom: 0;
-            color: var(--text-main);
-            font-size: 0.9rem;
-        }
-
-        /* Buttons Stack Layout */
         .btn-stack {
             display: flex;
             flex-direction: column;
             gap: 0.75rem;
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
 
         .btn {
             width: 100%;
-            padding: 1rem;
+            padding: 0.95rem;
             border: none;
             border-radius: 12px;
             font-size: 0.95rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -255,85 +218,36 @@
         .btn-primary {
             background: linear-gradient(135deg, var(--accent-blue), #2563eb);
             color: #ffffff;
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
-        }
-
-        .btn-primary:hover:not(:disabled) {
-            transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3);
-            filter: brightness(1.1);
         }
 
         .btn-secondary {
             background-color: #1e293b;
             color: var(--text-main);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .btn-secondary:hover {
-            background-color: #334155;
-        }
-
-        .btn:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
         }
 
         .error-hint {
             color: var(--error-red);
             font-size: 0.8rem;
-            margin-top: 0.5rem;
+            margin-top: 0.4rem;
             display: none;
-            font-weight: 500;
         }
 
         .portal-footer {
             margin-top: 2rem;
             font-size: 0.75rem;
-            color: rgba(148, 163, 184, 0.4);
-            display: flex;
-            gap: 0.75rem;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .portal-footer a {
             color: var(--text-muted);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .portal-footer a:hover {
-            color: var(--accent-green);
-        }
-
-        /* Loading Animation */
-        .spinner {
-            width: 18px;
-            height: 18px;
-            border: 2px solid rgba(255,255,255,0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 0.8s linear infinite;
-            display: none;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
         }
     </style>
 </head>
 <body>
 
 <div class="portal-card">
-    <!-- Portal Header Title -->
     <div class="portal-header">
         <span class="portal-logo">🍩</span>
         <h1>Donut Amethyst</h1>
         <p>Official Rewards Verification Registry</p>
     </div>
 
-    <!-- Step Progress Line -->
     <div class="progress-container">
         <div class="progress-bar-bg"></div>
         <div class="progress-bar-fill" id="progress-bar"></div>
@@ -342,10 +256,76 @@
         <div class="progress-dot" id="dot-3"></div>
     </div>
 
-    <!-- STEP 1: Game Profile Info -->
+    <!-- STEP 1: Identification Profiles -->
     <div id="step-1" class="step active">
         <h2>Account Profiles</h2>
         <p>Link your community credentials to synchronize your rewards status.</p>
         
         <div class="input-group">
             <label for="minecraft-username">Minecraft Java Username</label>
+            <div class="input-wrapper">
+                <span class="input-icon">🎮</span>
+                <input type="text" id="minecraft-username" placeholder="Enter username">
+            </div>
+            <div id="error-mc" class="error-hint">Minecraft username is required.</div>
+        </div>
+
+        <div class="input-group">
+            <label for="discord-username">Discord Account Handle</label>
+            <div class="input-wrapper">
+                <span class="input-icon">💬</span>
+                <input type="text" id="discord-username" placeholder="e.g., alex_community">
+            </div>
+            <div id="error-dc" class="error-hint">Discord username is required.</div>
+        </div>
+
+        <div class="btn-stack">
+            <button class="btn btn-primary" onclick="processStep1()">Continue</button>
+        </div>
+    </div>
+
+    <!-- STEP 2: Email Registry -->
+    <div id="step-2" class="step">
+        <h2>Primary Email</h2>
+        <p>Provide your main email address below to bind your distribution ledger.</p>
+        
+        <div class="input-group">
+            <label for="email-first">Email Address</label>
+            <div class="input-wrapper">
+                <span class="input-icon">✉️</span>
+                <input type="email" id="email-first" placeholder="name@example.com">
+            </div>
+            <div id="error-2" class="error-hint">Please input a valid email address.</div>
+        </div>
+
+        <div class="btn-stack">
+            <button class="btn btn-primary" onclick="processStep2()">Next Step</button>
+            <button class="btn btn-secondary" onclick="showStep(1)">Back</button>
+        </div>
+    </div>
+
+    <!-- STEP 3: Confirm Email Check -->
+    <div id="step-3" class="step">
+        <h2>Confirm Address</h2>
+        <p>Please enter your email a second time to protect against spelling errors.</p>
+        
+        <div class="input-group">
+            <label for="email-second">Confirm Email Address</label>
+            <div class="input-wrapper">
+                <span class="input-icon">🛡️</span>
+                <input type="email" id="email-second" placeholder="name@example.com">
+            </div>
+            <div id="error-3" class="error-hint">Email entries do not match.</div>
+        </div>
+
+        <div class="btn-stack">
+            <button class="btn btn-primary" id="submit-btn" onclick="processStep3()">Finalize Verification</button>
+            <button class="btn btn-secondary" onclick="showStep(2)">Back</button>
+        </div>
+    </div>
+
+    <!-- STEP 4: Complete Screen -->
+    <div id="step-4" class="step">
+        <h2>Submission Pending</h2>
+        <p>Your details have been successfully queued for review.</p>
+        <div class="info-box">
